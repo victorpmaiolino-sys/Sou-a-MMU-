@@ -322,6 +322,24 @@ function finishInfiniteMode() {
       ${isNewRecord ? '<br><span style="color: #10b981; font-weight: bold;">✨ Novo Recorde Pessoal Alcançado!</span>' : ''}
     </div>
   `;
+
+// Esconder todos os botões específicos primeiro
+    const btnInf1 = document.getElementById('btn-retry-fase1');
+    const btnInf2 = document.getElementById('btn-retry-fase2');
+    const btnNorm1 = document.getElementById('btn-normal-fase1');
+    const btnNorm2 = document.getElementById('btn-normal-fase2');
+
+    if (btnInf1) btnInf1.style.display = 'none';
+    if (btnInf2) btnInf2.style.display = 'none';
+    if (btnNorm1) btnNorm1.style.display = 'none';
+    if (btnNorm2) btnNorm2.style.display = 'none';
+
+    // Mostrar apenas o botão infinito correspondente
+    if (currentPhase === '1-sec' && btnInf1) {
+        btnInf1.style.display = 'inline-block';
+    } else if (currentPhase === '2-sec' && btnInf2) {
+        btnInf2.style.display = 'inline-block';
+    }
 }
 
 // FINALIZAR FASE NORMAL (APÓS 10 EXERCÍCIOS)

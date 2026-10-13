@@ -351,3 +351,15 @@ input[type="number"] {
     padding-bottom: 20px;
   }
 }
+
+/* Centraliza e alinha os botões da tela de Game Over */
+#game-over-screen .button-group,
+#game-over-screen {
+    text-align: center;
+}
+
+#game-over-screen button {
+    display: inline-block;
+    margin: 8px 5px;
+    vertical-align: middle;
+}

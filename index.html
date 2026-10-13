@@ -199,8 +199,10 @@
         <!-- Feedback final via JS -->
       </div>
 
-      <button class="btn btn-success" onclick="startPhase(1)">Ir para a Fase 1 (Registrador Base)</button>
-      <button class="btn btn-secondary" onclick="startPhase(2)">Refazer Fase 2 (Paginação)</button>
+      <button class="btn btn-success" id="btn-retry-fase1" onclick="startInfiniteMode('1-sec')">Refazer Fase 1 (Infinito)</button>
+      <button class="btn btn-secondary" id="btn-retry-fase2" onclick="startInfiniteMode('2-sec')">Refazer Fase 2 (Infinito)</button>
+      <button class="btn btn-success" id="btn-normal-fase1" onclick="startPhase(1)">Ir para a Fase 1 (Registrador Base)</button>
+      <button class="btn btn-secondary" id="btn-normal-fase2" onclick="startPhase(2)">Refazer Fase 2 (Paginação)</button>
       <button class="btn" onclick="goToMainMenu()">Voltar ao Menu Principal</button>
     </div>
 
