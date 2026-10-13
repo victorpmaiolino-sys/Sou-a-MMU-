@@ -375,9 +375,26 @@ function finishPhase() {
     document.getElementById('final-time').textContent = timeElapsed + "s";
 
     document.getElementById('final-feedback').innerHTML = `
-      <h3>Parabéns! Modo Infinito da Fase 2 Desbloqueado</h3>
+      <h3>Parabéns! Modo Infinito da Fase 2 Desbloqueado<br>
+      🚀 <strong>Fase 2 Concluída com Sucesso!</strong><br></h3>
       <p>Você concluiu a paginação com ${accuracy}% de precisão. O Modo Infinito da Fase 2 já está visível no menu principal!</p>
     `;
+    // encerramento da Fase 2 Normal:
+
+      const btnInf1 = document.getElementById('btn-retry-fase1');
+      const btnInf2 = document.getElementById('btn-retry-fase2');
+      const btnNorm1 = document.getElementById('btn-normal-fase1');
+      const btnNorm2 = document.getElementById('btn-normal-fase2');
+
+    // 1. Esconder os botões do Modo Infinito
+      if (btnInf1) btnInf1.style.display = 'none';
+      if (btnInf2) btnInf2.style.display = 'none';
+
+    // 2. Exibir os botões do Modo Normal da Fase 2
+      if (btnNorm1) btnNorm1.style.display = 'inline-block'; // "Ir para a Fase 1"
+      if (btnNorm2) btnNorm2.style.display = 'inline-block'; // "Refazer Fase 2"
+
+    // O botão "Voltar ao Menu Principal" não possui ID restritivo e permanece sempre visível.
   }
 }
 
