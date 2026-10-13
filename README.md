@@ -9,7 +9,7 @@ Paginação & Tabela de Páginas   Mecânica da Fase 2, onde o jogador faz o loo
 
 ## Documentação completa 
 
-# 🕹️ Sou a MMU (Memory Management Unit)
+# 🕹️ Sou a MMU! (Memory Management Unit)
 
 > **Disciplina:** Sistemas Operacionais  
 > **Professor:** Prof. Me. Emerson Ap. Mouco Jr.  
