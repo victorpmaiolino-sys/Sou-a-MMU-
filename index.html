@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eu sou a MMU! - Jogo Educativo SO</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- MENU DE PAUSE OVERLAY -->
+    <div class="pause-overlay" id="pause-overlay">
+      <h2>⏸️ Jogo Pausado</h2>
+      <button class="btn" onclick="resumeGame()">Voltar ao Jogo</button>
+      <button class="btn btn-secondary" onclick="openPauseTutorial()">Ver Tutorial Novamente</button>
+      <button class="btn btn-danger" onclick="surrenderGame()">Sair para o Menu</button>
+    </div>
+
+    <!-- MODAL TUTORIAL (Dentro do Pause) -->
+    <div class="modal-tutorial" id="modal-tutorial">
+      <h3>📘 Tutorial Teórico da MMU</h3>
+      <div class="concept-box">
+        <h4>Fase 1: Registrador Base</h4>
+        <p>Soma Simples do Endereço Lógico com o Registrador Base.</p>
+        <p><strong>Fórmula:</strong> Endereço Lógico + Registrador Base (ex: 63 + 6000 = 6063)</p>
+      </div>
+      <div class="concept-box">
+        <h4>Fase 2: Paginação</h4>
+        <p>Mapeamento de Páginas para Quadros com a Tabela de Páginas.</p>
+        <p><strong>Fórmula:</strong> Quadro Físico Referente a Página lógica * 100 + Deslocamento (QuadroF 5 = 8 * 100 + 36 = 836)</p>
+      </div>
+      <button class="btn btn-secondary" onclick="closePauseTutorial()">Voltar ao Menu de Pause</button>
+    </div>
+
+    <!-- TELA INICIAL / MENU PRINCIPAL (NOVA ESTRUTURA) -->
+    <div id="main-menu-screen" class="active">
+      <div class="main-menu-grid">
+        
+        <!-- Coluna Esquerda: Título em Destaque -->
+        <div class="menu-left">
+          <h1 class="brand-title">EU SOU A MMU!</h1>
+          <p class="brand-subtitle">Simulador de Gerenciamento de Memória</p>
+        </div>
+
+        <!-- Coluna Direita: Opções do Menu -->
+        <div class="menu-right">
+          
+             <!-- Seleção de Fases -->
+          <div class="menu-section">
+            <h3>Escolher Fase</h3>
+            <button class="btn btn-menu" onclick="startPhase(1)">
+              1️⃣Fase 1: Registrador Base
+            </button>
+            
+            <!-- Botão da Fase 1 Infinita (Oculto inicialmente) -->
+            <button class="btn btn-menu btn-success" id="btn-phase-1-sec" onclick="startPhase('1-sec')" style="display: none;">
+              ♾️ Fase 1: Modo Infinito
+            </button>
+            
+            <button class="btn btn-menu btn-disabled" id="btn-phase-2" onclick="startPhase(2)">
+              🔒 Fase 2: Paginação
+            </button>
+
+            <!-- Botão da Fase 2 Infinita (Oculto inicialmente) -->
+            <button class="btn btn-menu btn-success" id="btn-phase-2-sec" onclick="startPhase('2-sec')" style="display: none;">
+              ♾️ Fase 2: Modo Infinito
+            </button>
+          </div>
+
+          <!-- Tutorial -->
+          <div class="menu-section margin-top-15">
+            <button class="btn btn-secondary btn-menu" onclick="showInitialTutorial()">
+              📖 Ver Tutorial
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TELA DE TUTORIAL COMPLETO -->
+    <div id="tutorial-screen">
+      <h1>📘 Tutorial Completo</h1>
+      <p>A MMU (Memory Management Unit) é o chip de hardware responsável por traduzir endereços lógicos em endereços físicos na RAM em tempo real.</p>
+      
+      <div class="concept-box">
+        <h3>Fase 1: Registrador Base (10 Exercícios)</h3>
+        <p>Os programas acreditam que começam no endereço virtual <strong>0</strong>. Para encontrar o endereço físico na RAM, a MMU soma o Endereço Lógico com o <strong>Registrador Base</strong>.</p>
+        <p><em>Formula: Endereço Lógico + Registrador Base (ex: 63 + 6000 = 6063)</em></p>
+      </div>
+
+      <div class="concept-box">
+        <h3>Fase 2: Paginação (10 Exercícios)</h3>
+        <p>Na paginação, a MMU consulta a Tabela de Páginas para mapear a página no quadro correto e soma com o deslocamento.</p>
+        <p><em>Formula: Quadro Físico Referente a Página lógica + Deslocamento (ex: 5 * 100 + 63 = 563)</em></p>
+      </div>
+
+      <button class="btn btn-secondary" onclick="goToMainMenu()">Voltar ao Menu Principal</button>
+    </div>
+
+    <!-- TELA DE GAMEPLAY -->
+    <div id="game-screen">
+      <div class="game-header">
+        <h2 id="phase-title">Fase 1: Registrador Base</h2>
+        <button class="btn-pause" onclick="pauseGame()">⏸️ Pausar</button>
+      </div>
+
+      <div class="dashboard">
+        <div class="metric-card">
+          <div class="val blue" id="exercise-counter">1/10</div>
+          <div class="label">Exercício</div>
+        </div>
+        <div class="metric-card">
+          <div class="val green" id="score-val">0</div>
+          <div class="label">Acertos</div>
+        </div>
+        <div class="metric-card">
+          <div class="val" id="timer-val">0s</div>
+          <div class="label">Tempo Decorrido</div>
+        </div>
+      </div>
+
+      <div class="mmu-workspace">
+        <div class="request-box" id="request-display">Carregando requisição...</div>
+
+        <div class="hardware-info" id="hardware-display">
+          <!-- Conteúdo dinâmico via JS -->
+        </div>
+
+        <div class="input-area">
+          <input type="number" id="physical-input" placeholder="Endereço Físico" autofocus>
+          <button class="btn btn-inline" onclick="submitTranslation()">Traduzir</button>
+        </div>
+      </div>
+
+      <button class="btn btn-danger" id="btn-finish-mmu" style="display: none; margin: 10px auto 0;" onclick="finishSecretMode()">Finalizar MMU</button>
+
+      <!-- Log de Feedback Interno -->
+      <div class="feedback-log" id="system-log">
+        [SISTEMA]: MMU inicializada. Aguardando tradução...
+      </div>
+    </div>
+
+    <!-- TELA DE RESUMO DA FASE 1 -->
+    <div id="phase-summary-screen">
+      <h2>🎉 Fase 1 Concluída!</h2>
+      <p class="text-center">Confira o seu desempenho no Registrador Base:</p>
+
+      <div class="dashboard margin-top-20">
+        <div class="metric-card">
+          <div class="val green" id="f1-acc">0%</div>
+          <div class="label">Precisão de Acertos</div>
+        </div>
+        <div class="metric-card">
+          <div class="val blue" id="f1-time">0s</div>
+          <div class="label">Tempo Total</div>
+        </div>
+        <div class="metric-card">
+          <div class="val orange" id="f1-score-val">0/10</div>
+          <div class="label">Exercícios Corretos</div>
+        </div>
+      </div>
+
+      <div class="record-box" id="f1-record-display">
+        🏆 Recorde Pessoal da Fase 1: Ainda não registrado.
+      </div>
+
+      <button class="btn btn-success" onclick="startPhase(2)">Ir para a Fase 2 (Paginação)</button>
+      <button class="btn btn-secondary" onclick="startPhase(1)">Refazer Fase 1 (Bater Recorde)</button>
+      <button class="btn btn-secondary" onclick="goToMainMenu()">Voltar ao Menu Principal</button>
+    </div>
+
+    <!-- TELA DE GAME OVER / FIM DA FASE 2 -->
+    <div id="game-over-screen">
+      <h1 id="game-over-title">Fim da Execução!</h1>
+      <p class="text-center">Métricas finais da sua simulação na MMU:</p>
+
+      <div class="dashboard margin-top-20">
+        <div class="metric-card">
+          <div class="val green" id="final-score">0/10</div>
+          <div class="label">Acertos na Fase 2</div>
+        </div>
+        <div class="metric-card">
+          <div class="val blue" id="final-acc">0%</div>
+          <div class="label">Precisão Final</div>
+        </div>
+        <div class="metric-card">
+          <div class="val orange" id="final-time">0s</div>
+          <div class="label">Tempo da Fase 2</div>
+        </div>
+      </div>
+
+      <div class="concept-box" id="final-feedback">
+        <!-- Feedback final via JS -->
+      </div>
+
+      <button class="btn" onclick="goToMainMenu()">Voltar ao Menu Principal</button>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
