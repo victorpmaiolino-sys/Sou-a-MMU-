@@ -32,11 +32,11 @@ O jogo simula o papel do chip **MMU (Memory Management Unit)** presente na CPU. 
 ---
 
 ## 🎮 Como Jogar
-1. Acesse o jogo publicado no **GitHub Pages**: `[COLE_SEU_LINK_DO_GITHUB_PAGES_AQUI]`
+1. Acesse o jogo publicado no **GitHub Pages**: `https://victorpmaiolino-sys.github.io/Sou-a-MMU-/`
 2. Na tela inicial, leia o **Tutorial** para entender como a tradução de endereços funciona na teoria.
 3. Clique em **"Começar Simulação"**:
    * **Fase 1 (Registrador Base):** Calcule o Endereço Físico somando o Endereço Lógico ao valor do Registrador Base.
-   * **Fase 2 (Paginação):** A partir de 5 acertos, o sistema ativa a paginação. Consulte a Tabela de Páginas da MMU para identificar em qual Quadro (*Frame*) a Página está alocada e aplique a fórmula: `(Quadro × 100) + Deslocamento`.
+   * **Fase 2 (Paginação):** O sistema ativa a paginação. Consulte a Tabela de Páginas da MMU para identificar em qual Quadro (*Frame*) a Página está alocada e aplique a fórmula: `(Quadro × 100) + Deslocamento`.
 4. Digite a resposta no campo e pressione `Enter` ou clique no botão **"Traduzir"**.
 5. Acompanhe o log do sistema no terminal verde e tente obter a maior precisão possível antes do tempo acabar!
 
