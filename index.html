@@ -137,7 +137,7 @@
         </div>
       </div>
 
-      <button class="btn btn-danger" id="btn-finish-mmu" style="display: none; margin: 10px auto 0;" onclick="finishSecretMode()">Finalizar MMU</button>
+      <button class="btn btn-danger" id="btn-finish-mmu" style="display: none; margin: 10px auto 0;" onclick="finishInfiniteMode()">Finalizar MMU</button>
 
       <!-- Log de Feedback Interno -->
       <div class="feedback-log" id="system-log">
@@ -198,6 +198,8 @@
         <!-- Feedback final via JS -->
       </div>
 
+      <button class="btn btn-success" onclick="startPhase(1)">Ir para a Fase 1 (Registrador Base)</button>
+      <button class="btn btn-secondary" onclick="startPhase(2)">Refazer Fase 2 (Paginação)</button>
       <button class="btn" onclick="goToMainMenu()">Voltar ao Menu Principal</button>
     </div>
 
